@@ -3,9 +3,9 @@ import os
 file_names = ['_admin.py', '_controller.py', '_model.py', '_view.py', '_serializer.py', '_url.py']
 modul_name = str(input("Enter module name: "))
 
-os.makedirs(f'app/moduls/_{modul_name}', exist_ok=True)
+os.makedirs(f'moduls/_{modul_name}', exist_ok=True)
 
-dir_name = f'app/moduls/_{modul_name}/{modul_name}'
+dir_name = f'moduls/_{modul_name}/{modul_name}'
 
 for i in file_names:
     with open(dir_name + i, 'w') as f:
