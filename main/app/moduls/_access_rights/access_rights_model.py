@@ -1,6 +1,6 @@
 from django.db import models
 
-class Customer(models.Model):
+class AccessRights(models.Model):
     class Meta:
         db_table = '_access_rights'
     name = models.CharField(max_length=100)
