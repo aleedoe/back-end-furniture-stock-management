@@ -1,5 +1,5 @@
 from django.db import models
-from app.moduls._warehouser import Warehouser
+from app.moduls._warehouser.warehouser_model import Warehouser
 
 class Category(models.Model):
     class Meta:
