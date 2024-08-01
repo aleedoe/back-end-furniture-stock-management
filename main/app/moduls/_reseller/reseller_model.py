@@ -8,7 +8,7 @@ class Reseller(models.Model):
     phone = models.IntegerField()
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=20)
-    access_rights_id = models.ForeignKey(AccessRights, on_delete=models.CASCADE)
+    access_rights = models.ForeignKey(AccessRights, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -18,9 +18,9 @@ class Furniture(models.Model):
     prize = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField()
     description = models.TextField()
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     attributes = models.JSONField(null=True, blank=True)
-    warehouser_id = models.ForeignKey(Warehouser, on_delete=models.SET_NULL, null=True)
+    warehouser = models.ForeignKey(Warehouser, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
