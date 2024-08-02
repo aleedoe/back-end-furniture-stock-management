@@ -5,4 +5,5 @@ urlpatterns = [
     path("", include("app.moduls._administrator.administrator_url")),
     path("", include("app.moduls._reseller.reseller_url")),
     path("", include("app.moduls._warehouser.warehouser_url")),
+    path("", include("app.moduls._furniture.furniture_url")),
 ]
