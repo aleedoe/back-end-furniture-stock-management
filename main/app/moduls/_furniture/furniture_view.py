@@ -6,3 +6,8 @@ from . import furniture_controller
 def categoryList(request):
     if request.method == 'GET':
         return furniture_controller.getAllCategories(request)
+
+@api_view(['GET', 'POST'])
+def furnitureList(request):
+    if request.method == 'GET':
+        return furniture_controller.getAllFurnitures(request)
