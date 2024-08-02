@@ -3,5 +3,5 @@ from django.urls import path
 from . import administrator_view
 
 urlpatterns = [
-    path('url/', administrator_view),
+    path('administrator/', administrator_view.administratorList),
 ]
