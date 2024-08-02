@@ -3,4 +3,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path("", include("app.moduls._administrator.administrator_url")),
+    path("", include("app.moduls._reseller.reseller_url")),
 ]
