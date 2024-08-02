@@ -5,7 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from . import warehouser_model
 from . import warehouser_serializer
 
-def getAllReseller(request):
+def getAllWarehouser(request):
     
     try:
         warehousers = warehouser_model.Warehouser.objects.all().order_by('id')
