@@ -4,4 +4,5 @@ from . import furniture_view
 
 urlpatterns = [
     path('category/', furniture_view.categoryList),
+    path('furniture/', furniture_view.furnitureList),
 ]
