@@ -6,4 +6,5 @@ urlpatterns = [
     path("", include("app.moduls._reseller.reseller_url")),
     path("", include("app.moduls._warehouser.warehouser_url")),
     path("", include("app.moduls._furniture.furniture_url")),
+    path("", include("app.moduls._transaction.transaction_url")),
 ]
