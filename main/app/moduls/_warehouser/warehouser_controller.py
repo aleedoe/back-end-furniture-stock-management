@@ -32,3 +32,24 @@ def getAllWarehouser(request):
         }
         
         return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def getWarehouserById(id):
+    try:
+        warehouser = warehouser_model.Warehouser.objects.get(id=id)
+        serializer = warehouser_serializer.WarehouserSerializer(warehouser)
+        
+        data_response = {
+            'status': 'success',
+            'data': serializer.data
+        }
+        
+        return Response(data_response, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        data_response = {
+            'status': 'error',
+            'message': str(e)
+        }
+        
+        return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
