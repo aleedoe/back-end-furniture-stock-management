@@ -37,7 +37,7 @@ def getAllReseller(request):
 def getResellerById(id):
     try:
         reseller = reseller_model.Reseller.objects.get(id=id)
-        serializer = reseller_model.Reseller(reseller)
+        serializer = reseller_serializer.ResellerSerializer(reseller)
         
         data_response = {
             'status': 'success',
