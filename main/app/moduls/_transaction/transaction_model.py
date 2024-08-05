@@ -16,3 +16,10 @@ class Transaction(models.Model):
     status = models.CharField(max_length=50, choices=[(status.name, status.value) for status in TransactionStatus])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class TransactionDetail(models.Model):
+    class Meta:
+        db_table = '_transaction_detail'
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    furniture = models.ForeignKey(Furniture, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
