@@ -32,3 +32,24 @@ def getAllAdministrators(request):
         }
         
         return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def getAdministratorById(id):
+    try:
+        administrator = administrator_model.Administrator.objects.get(id=id)
+        serializer = administrator_serializer.AdministratorSerializer(administrator)
+        
+        data_response = {
+            'status': 'success',
+            'data': serializer.data
+        }
+        
+        return Response(data_response, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        data_response = {
+            'status': 'error',
+            'message': str(e)
+        }
+        
+        return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
