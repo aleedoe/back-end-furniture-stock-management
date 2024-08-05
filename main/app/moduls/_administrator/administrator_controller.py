@@ -23,7 +23,7 @@ def getAllAdministrators(request):
             'data': serializer.data,
         }
         
-        return Response(data_response)
+        return Response(data_response, status=status.HTTP_200_OK)
     
     except Exception as e:
         data_response = {
