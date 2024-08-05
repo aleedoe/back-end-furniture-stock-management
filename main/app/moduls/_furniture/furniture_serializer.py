@@ -9,7 +9,8 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class FurnitureSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
 
     class Meta:
         model = furniture_model.Furniture
-        fields = ['id', 'name', 'prize', 'quantity', 'description', 'attributes', 'category_id', 'warehouser_id']
+        fields = ['id', 'name', 'prize', 'quantity', 'description', 'attributes', 'category', 'warehouser_id']
