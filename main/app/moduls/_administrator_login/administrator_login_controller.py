@@ -1,5 +1,6 @@
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
 
 from . import administrator_login_model
@@ -7,6 +8,13 @@ from . import administrator_login_serializer
 
 from app.moduls._administrator.administrator_model import Administrator
 from app.moduls._administrator.administrator_serializer import AdministratorSerializer
+
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
 
 def verifyLogin(request):
     try:
@@ -33,9 +41,11 @@ def verifyLogin(request):
         
         # Jika username dan password valid
         serializer = AdministratorSerializer(administrator)
+        tokens = get_tokens_for_user(administrator)
         data_response = {
             'status': "success",
             'data': serializer.data,
+            'tokens': tokens,
         }
         return Response(data_response, status=status.HTTP_200_OK)
 
