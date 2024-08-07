@@ -1,6 +1,5 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.pagination import PageNumberPagination
 
 from . import administrator_login_model
 from . import administrator_login_serializer
@@ -8,9 +7,9 @@ from . import administrator_login_serializer
 from app.moduls._administrator.administrator_model import Administrator
 from app.moduls._administrator.administrator_serializer import AdministratorSerializer
 
-def verifyLogin(data):
+def verifyLogin(request):
     try:
-        administrator = Administrator.objects.get(username=data['username'], password=data['password'])
+        administrator = Administrator.objects.get(username=request.data['username'], password=request.data['password'])
         serializer = AdministratorSerializer(many=True)
 
         data_response = {
