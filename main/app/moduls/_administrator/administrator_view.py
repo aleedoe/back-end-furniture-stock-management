@@ -1,8 +1,10 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 from . import administrator_controller
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
 def administratorList(request):
     if request.method == 'GET':
         return administrator_controller.getAllAdministrators(request)
