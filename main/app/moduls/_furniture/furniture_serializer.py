@@ -13,4 +13,4 @@ class FurnitureSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = furniture_model.Furniture
-        fields = ['id', 'name', 'prize', 'quantity', 'description', 'attributes', 'category', 'warehouser_id']
+        fields = ['id', 'name', 'prize', 'quantity', 'description', 'attributes', 'category']

@@ -1,5 +1,4 @@
 from django.db import models
-from app.moduls._warehouser.warehouser_model import Warehouser
 
 class Category(models.Model):
     class Meta:
@@ -20,7 +19,6 @@ class Furniture(models.Model):
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     attributes = models.JSONField(null=True, blank=True)
-    warehouser = models.ForeignKey(Warehouser, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
