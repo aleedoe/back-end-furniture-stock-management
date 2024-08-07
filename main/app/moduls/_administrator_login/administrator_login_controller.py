@@ -9,8 +9,8 @@ from app.moduls._administrator.administrator_serializer import AdministratorSeri
 
 def verifyLogin(request):
     try:
-        administrator = Administrator.objects.get(username=request.data['username'], password=request.data['password'])
-        serializer = AdministratorSerializer(administrator, many=True)
+        administrator = Administrator.objects.get(name=request.data['username'], password=request.data['password'])
+        serializer = AdministratorSerializer(administrator)
 
         data_response = {
             'status': "success",
