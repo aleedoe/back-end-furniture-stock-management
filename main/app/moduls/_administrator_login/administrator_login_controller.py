@@ -1,5 +1,6 @@
 from rest_framework import status
 from rest_framework.response import Response
+from django.db.models import Q
 
 from . import administrator_login_model
 from . import administrator_login_serializer
@@ -9,7 +10,11 @@ from app.moduls._administrator.administrator_serializer import AdministratorSeri
 
 def verifyLogin(request):
     try:
-        administrator = Administrator.objects.get(name=request.data['username'], password=request.data['password'])
+        username = request.data['username']
+        password = request.data['password']
+        
+        administrator = Administrator.objects.get(Q(name=username) | Q(email=username), password=password)
+        
         serializer = AdministratorSerializer(administrator)
 
         data_response = {
@@ -18,6 +23,14 @@ def verifyLogin(request):
         }
         
         return Response(data_response, status=status.HTTP_200_OK)
+    
+    except Administrator.DoesNotExist:
+        data_response = {
+            'status': "error",
+            'message': "Invalid username or password.",
+        }
+        
+        return Response(data_response, status=status.HTTP_401_UNAUTHORIZED)
     
     except Exception as e:
         data_response = {
