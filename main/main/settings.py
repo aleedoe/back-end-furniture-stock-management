@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'furniture_stock_management',
+        'NAME': 'furniture_stock_management_v2',
         'USER': 'alie',
         'PASSWORD': 'kmzway76aa',
         'HOST': 'localhost',
