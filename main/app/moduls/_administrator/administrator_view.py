@@ -9,7 +9,8 @@ def administratorList(request):
     if request.method == 'GET':
         return administrator_controller.getAllAdministrators(request)
     
-    # elif request.method == 'POST':
+    elif request.method == 'POST':
+        return administrator_controller.addAdministrator(request)
 
 
 @api_view(['GET', 'DELETE', 'PUT'])

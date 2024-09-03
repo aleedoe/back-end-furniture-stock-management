@@ -53,3 +53,32 @@ def getAdministratorById(id):
         }
         
         return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def addAdministrator(request):
+    try:
+        print(request.data)
+        serializer = administrator_serializer.AdministratorSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            data_response = {
+                'status': 'success',
+                'data': serializer.data
+            }
+            
+            return Response(data_response, status=status.HTTP_201_CREATED)
+        
+        data_response = {
+            'status': 'error',
+            'message': serializer.errors
+        }
+        
+        return Response(data_response, status=status.HTTP_400_BAD_REQUEST)
+
+    except Exception as e:
+        data_response = {
+            'status': 'error',
+            'message': str(e)
+        }
+        
+        return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
