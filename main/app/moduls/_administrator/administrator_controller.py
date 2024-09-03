@@ -21,6 +21,7 @@ def getAllAdministrators(request):
             'next': paginator.get_next_link(),
             'previous': paginator.get_previous_link(),
             'data': serializer.data,
+            'description': 'successfully retrieve all Administrators'
         }
         
         return Response(data_response, status=status.HTTP_200_OK)
@@ -41,7 +42,8 @@ def getAdministratorById(id):
         
         data_response = {
             'status': 'success',
-            'data': serializer.data
+            'data': serializer.data,
+            'description': 'successfully retrieve Administrator'
         }
         
         return Response(data_response, status=status.HTTP_200_OK)
@@ -62,7 +64,8 @@ def addAdministrator(request):
             serializer.save()
             data_response = {
                 'status': 'success',
-                'data': serializer.data
+                'data': serializer.data,
+                'description': 'Administrator created successfully'
             }
             
             return Response(data_response, status=status.HTTP_201_CREATED)
@@ -91,7 +94,8 @@ def updateAdministrator(request, id):
             serializer.save()
             data_response = {
                 'status': 'success',
-                'data': serializer.data
+                'data': serializer.data,
+                'description': 'Administrator updated successfully'
             }
             return Response(data_response, status=status.HTTP_200_OK)
         data_response = {
