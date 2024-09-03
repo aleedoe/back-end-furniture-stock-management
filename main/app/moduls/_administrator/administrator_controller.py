@@ -57,7 +57,6 @@ def getAdministratorById(id):
 
 def addAdministrator(request):
     try:
-        print(request.data)
         serializer = administrator_serializer.AdministratorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
