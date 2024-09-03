@@ -83,7 +83,7 @@ def addAdministrator(request):
         return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-def updateAdministrator(id, request):
+def updateAdministrator(request, id):
     try:
         administrator = administrator_model.Administrator.objects.get(id=id)
         serializer = administrator_serializer.AdministratorSerializer(administrator, data=request.data, partial=True)
@@ -91,23 +91,17 @@ def updateAdministrator(id, request):
             serializer.save()
             data_response = {
                 'status': 'success',
-                'data': serializer.data,
-                'description': 'Administrator updated successfully'
+                'data': serializer.data
             }
-            
             return Response(data_response, status=status.HTTP_200_OK)
-        
         data_response = {
             'status': 'error',
             'message': serializer.errors
         }
-        
         return Response(data_response, status=status.HTTP_400_BAD_REQUEST)
-
     except Exception as e:
         data_response = {
             'status': 'error',
             'message': str(e)
         }
-        
         return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
