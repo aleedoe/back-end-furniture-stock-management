@@ -90,19 +90,43 @@ def updateAdministrator(request, id):
     try:
         administrator = administrator_model.Administrator.objects.get(id=id)
         serializer = administrator_serializer.ActionAdministratorSerializer(administrator, data=request.data, partial=True)
+
         if serializer.is_valid():
-            serializer.save()
+            # Membandingkan data yang ada di database dengan data yang diterima dari request
+            data_is_different = False
+            for field, value in serializer.validated_data.items():
+                if getattr(administrator, field) != value:
+                    data_is_different = True
+                    break
+
+            if data_is_different:
+                serializer.save()
+                data_response = {
+                    'status': 'success',
+                    'data': serializer.data,
+                    'description': 'Administrator updated successfully'
+                }
+                return Response(data_response, status=status.HTTP_200_OK)
+            else:
+                data_response = {
+                    'status': 'success',
+                    'description': 'No changes detected; Administrator not updated'
+                }
+                return Response(data_response, status=status.HTTP_200_OK)
+        else:
             data_response = {
-                'status': 'success',
-                'data': serializer.data,
-                'description': 'Administrator updated successfully'
+                'status': 'error',
+                'message': serializer.errors
             }
-            return Response(data_response, status=status.HTTP_200_OK)
+            return Response(data_response, status=status.HTTP_400_BAD_REQUEST)
+
+    except administrator_model.Administrator.DoesNotExist:
         data_response = {
             'status': 'error',
-            'message': serializer.errors
+            'message': 'Administrator not found'
         }
-        return Response(data_response, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data_response, status=status.HTTP_404_NOT_FOUND)
+
     except Exception as e:
         data_response = {
             'status': 'error',
