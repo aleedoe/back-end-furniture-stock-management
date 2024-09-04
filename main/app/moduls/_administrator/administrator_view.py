@@ -21,6 +21,6 @@ def administrator(request, id):
     elif request.method == 'PUT':
         return administrator_controller.updateAdministrator(request, id)
     
-    # elif request.method == 'DELETE':
-    #     return customers_controller.deleteCustomer(id)
+    elif request.method == 'DELETE':
+        return administrator_controller.deleteAdministrator(id)
     

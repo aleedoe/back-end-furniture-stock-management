@@ -140,3 +140,28 @@ def updateAdministrator(request, id):
             'message': str(e)
         }
         return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def deleteAdministrator(id):
+    try:
+        administrator = administrator_model.Administrator.objects.get(id=id)
+        administrator.delete()
+        data_response = {
+            'status': 'success',
+            'description': 'Administrator deleted successfully'
+        }
+        return Response(data_response, status=status.HTTP_200_OK)
+
+    except administrator_model.Administrator.DoesNotExist:
+        data_response = {
+            'status': 'error',
+            'message': 'Administrator not found'
+        }
+        return Response(data_response, status=status.HTTP_404_NOT_FOUND)
+
+    except Exception as e:
+        data_response = {
+            'status': 'error',
+            'message': str(e)
+        }
+        return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
