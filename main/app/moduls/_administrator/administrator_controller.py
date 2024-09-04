@@ -48,6 +48,13 @@ def getAdministratorById(id):
         
         return Response(data_response, status=status.HTTP_200_OK)
 
+    except administrator_model.Administrator.DoesNotExist:
+        data_response = {
+            'status': 'error',
+            'message': 'Administrator not found'
+        }
+        return Response(data_response, status=status.HTTP_404_NOT_FOUND)
+
     except Exception as e:
         data_response = {
             'status': 'error',
