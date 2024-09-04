@@ -21,6 +21,7 @@ def getAllAdministrators(request):
             'next': paginator.get_next_link(),
             'previous': paginator.get_previous_link(),
             'data': serializer.data,
+            'description': 'successfully retrieve all Administrators'
         }
         
         return Response(data_response, status=status.HTTP_200_OK)
@@ -41,7 +42,8 @@ def getAdministratorById(id):
         
         data_response = {
             'status': 'success',
-            'data': serializer.data
+            'data': serializer.data,
+            'description': 'successfully retrieve Administrator'
         }
         
         return Response(data_response, status=status.HTTP_200_OK)
@@ -52,4 +54,58 @@ def getAdministratorById(id):
             'message': str(e)
         }
         
+        return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def addAdministrator(request):
+    try:
+        serializer = administrator_serializer.AdministratorSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            data_response = {
+                'status': 'success',
+                'data': serializer.data,
+                'description': 'Administrator created successfully'
+            }
+            
+            return Response(data_response, status=status.HTTP_201_CREATED)
+        
+        data_response = {
+            'status': 'error',
+            'message': serializer.errors
+        }
+        
+        return Response(data_response, status=status.HTTP_400_BAD_REQUEST)
+
+    except Exception as e:
+        data_response = {
+            'status': 'error',
+            'message': str(e)
+        }
+        
+        return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def updateAdministrator(request, id):
+    try:
+        administrator = administrator_model.Administrator.objects.get(id=id)
+        serializer = administrator_serializer.AdministratorSerializer(administrator, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            data_response = {
+                'status': 'success',
+                'data': serializer.data,
+                'description': 'Administrator updated successfully'
+            }
+            return Response(data_response, status=status.HTTP_200_OK)
+        data_response = {
+            'status': 'error',
+            'message': serializer.errors
+        }
+        return Response(data_response, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        data_response = {
+            'status': 'error',
+            'message': str(e)
+        }
         return Response(data_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
