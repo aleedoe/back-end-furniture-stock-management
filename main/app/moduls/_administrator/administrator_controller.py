@@ -59,7 +59,7 @@ def getAdministratorById(id):
 
 def addAdministrator(request):
     try:
-        serializer = administrator_serializer.AdministratorSerializer(data=request.data)
+        serializer = administrator_serializer.ActionAdministratorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             data_response = {
@@ -89,7 +89,7 @@ def addAdministrator(request):
 def updateAdministrator(request, id):
     try:
         administrator = administrator_model.Administrator.objects.get(id=id)
-        serializer = administrator_serializer.AdministratorSerializer(administrator, data=request.data, partial=True)
+        serializer = administrator_serializer.ActionAdministratorSerializer(administrator, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             data_response = {
