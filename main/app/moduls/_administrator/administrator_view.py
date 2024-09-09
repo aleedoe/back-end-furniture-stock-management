@@ -13,12 +13,12 @@ def administratorList(request):
         return administrator_controller.addAdministrator(request)
 
 
-@api_view(['GET', 'DELETE', 'PUT'])
+@api_view(['GET', 'DELETE', 'PATCH'])
 def administrator(request, id):
     if request.method == 'GET':
         return administrator_controller.getAdministratorById(id)
     
-    elif request.method == 'PUT':
+    elif request.method == 'PATCH':
         return administrator_controller.updateAdministrator(request, id)
     
     elif request.method == 'DELETE':
